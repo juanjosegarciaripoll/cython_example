@@ -27,9 +27,22 @@ Let me describe the individual components:
 - `README.md` is this long description.
 - `setup.py` is the Python program that builds the module and assists `pip` with the installation.
 
-## Installing from sources
+## Building and installing from sources
 
-Let us assume that this folder is available in your system and you want to install the library. The canonical step to do so is
+The canonical way to build and install the package is to use [setuptools with a build system](https://setuptools.pypa.io/en/latest/build_meta.html). In Anaconda, this means you have to install
 ```
-python setup.py install
+conda install setuptools build
 ```
+Then you can issue the command
+```
+python -m build
+```
+from within the directory of this project. This command will create a new environment only with the libraries indicated in `pyproject.toml` and build your extension there.
+
+Alternatively, you can also use
+```
+python setup.py sdist bdist_wheel
+```
+provided you have already installed the build dependencies enumerated in `pyproject.toml`.
+
+Both processes create a `dist` directory with two files. The file `cython_example*.tar.gz` contains the sources and all files to rebuild the extension in any other machine. The file `cython_example*.whl` contains the binaries for this particular computer.

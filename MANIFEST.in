@@ -1,1 +1,3 @@
 include cython_example/dataset
+include cython_example/*.pyx
+
