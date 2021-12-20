@@ -64,3 +64,11 @@ This requires that you have already installed the build dependencies enumerated 
 ## Trying out the package
 
 The file `test/test.py` contains an example of a program that invokes all functions from all modules installed in `cython_example`. Note how the functions `norm1` and `test` are directly available form within the `matrix` submodule, because of the inline structure.
+```
+> python test/test.py
+norminf: 5.31mus/iteration (Cython version a)
+norminf: 13.1mus/iteration (Numpy version)
+norminf: 11.5mus/iteration (Numpy library version)
+trace: 0.486mus/iteration (Cython version)
+trace: 3mus/iteration (Numpy version)
+```
