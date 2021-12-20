@@ -1,4 +1,4 @@
-def norminf(double[:,::1] matrix):
+def norminf(double[:,::1] matrix) -> double:
     cdef Py_ssize_t m
     cdef double norm = 0.0, aux
     for m in range(matrix.shape[0]):

@@ -1,4 +1,4 @@
-def trace(double[:,::1] matrix):
+def trace(double[:,::1] matrix) -> double:
     cdef Py_ssize_t m
     cdef double E = 0.0
     for m in range(matrix.shape[0]):
