@@ -1,0 +1,5 @@
+cython_example/*.c
+build/
+cython_example.egg-info/
+dist/
+__pycache__
