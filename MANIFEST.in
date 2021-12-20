@@ -1,0 +1,2 @@
+include cython_example/__init__.pxd
+include cython_example/dataset
