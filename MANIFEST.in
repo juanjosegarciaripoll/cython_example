@@ -1,4 +1,4 @@
 include cython_example/dataset
-include cython_example/*.pyx
-include cython_example/matrix/*.pyx
-
+include cython_example/**/*.pyx
+include cython_example/**/*.pxd
+include cython_example/**/*.c
