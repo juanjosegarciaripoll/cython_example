@@ -11,7 +11,12 @@ extensions = [
     # A module that is built from various functions, and which itself depends
     # on the numpy library (the C core of this library)
     Extension('cython_example.matrix', ['cython_example/matrix/matrix.pyx'],
-        include_dirs=[np.get_include()])
+        include_dirs=[np.get_include()]),
+
+    # A module that is built with Cython and which demonstrates C classes
+    # and headers to use the C functions from other modules
+    Extension('cython_example.random.crng', ['cython_example/random/crng.pyx'],
+        include_dirs=[np.get_include()]),
     ]
 
 # See https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html
@@ -24,6 +29,7 @@ directives = {
     'wraparound': False, # a[-1] does not work
     'embedsignature': False, # Do not save typing / docstring
     'always_allow_keywords': False, # Faster calling conventions
+    'initializedcheck': False, # We assume memory views are initialized
 }
 
 setup(
