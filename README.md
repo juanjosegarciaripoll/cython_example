@@ -10,15 +10,22 @@ The structure of this project is as follows:
 ├── cython_example
 │   ├── dataset
 │   ├── hello.pyx
-│   └── matrix
-|       ├── matrix.pyx
-|       ├── norm1.pyx
-|       └── trace.pyx
+│   ├── matrix
+|   |   ├── matrix.pyx
+|   |   ├── norminf.pyx
+|   |   ├── random.pyx
+|   |   └── trace.pyx
+│   └── random
+|       ├── __init__.py
+|       ├── crng.pxd
+|       └── crng.pyx
 ├── MANIFEST.in
 ├── pyproject.toml
 ├── README.md
 ├── test
 │   └── test.py
+├── clean.cmd
+├── run.cmd
 └── setup.py
 ```
 
