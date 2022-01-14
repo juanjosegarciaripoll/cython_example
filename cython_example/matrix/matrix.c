@@ -2077,10 +2077,6 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_d
 /* ObjectToMemviewSlice.proto */
 static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_double(PyObject *, int writable_flag);
 
-/* MemviewDtypeToObject.proto */
-static CYTHON_INLINE PyObject *__pyx_memview_get_double(const char *itemp);
-static CYTHON_INLINE int __pyx_memview_set_double(const char *itemp, PyObject *obj);
-
 /* RealImag.proto */
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
@@ -2989,7 +2985,7 @@ static PyObject *__pyx_pf_14cython_example_6matrix_4random(CYTHON_UNUSED PyObjec
   __Pyx_memviewslice __pyx_v_view = { 0, 0, { 0 }, { 0 }, { 0 } };
   struct __pyx_obj_14cython_example_6random_4crng_CRNG *__pyx_v_crng = 0;
   PyObject *__pyx_v_output = NULL;
-  PyObject *__pyx_v_n = NULL;
+  Py_ssize_t __pyx_v_n;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2999,7 +2995,7 @@ static PyObject *__pyx_pf_14cython_example_6matrix_4random(CYTHON_UNUSED PyObjec
   PyObject *__pyx_t_5 = NULL;
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
   Py_ssize_t __pyx_t_7;
-  PyObject *(*__pyx_t_8)(PyObject *);
+  Py_ssize_t __pyx_t_8;
   Py_ssize_t __pyx_t_9;
   Py_ssize_t __pyx_t_10;
   int __pyx_lineno = 0;
@@ -3024,7 +3020,7 @@ static PyObject *__pyx_pf_14cython_example_6matrix_4random(CYTHON_UNUSED PyObjec
  *         CRNG crng = CRNG(rng)
  *     output = np.empty(shape, dtype=np.double)             # <<<<<<<<<<<<<<
  *     view = output.flatten()
- *     for n in range(view.size):
+ *     for n in range(view.shape[0]):
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3057,7 +3053,7 @@ static PyObject *__pyx_pf_14cython_example_6matrix_4random(CYTHON_UNUSED PyObjec
  *         CRNG crng = CRNG(rng)
  *     output = np.empty(shape, dtype=np.double)
  *     view = output.flatten()             # <<<<<<<<<<<<<<
- *     for n in range(view.size):
+ *     for n in range(view.shape[0]):
  *         view[n] = crng.random()
  */
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_output, __pyx_n_s_flatten); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 11, __pyx_L1_error)
@@ -3086,83 +3082,27 @@ static PyObject *__pyx_pf_14cython_example_6matrix_4random(CYTHON_UNUSED PyObjec
   /* "cython_example/matrix/random.pyx":12
  *     output = np.empty(shape, dtype=np.double)
  *     view = output.flatten()
- *     for n in range(view.size):             # <<<<<<<<<<<<<<
+ *     for n in range(view.shape[0]):             # <<<<<<<<<<<<<<
  *         view[n] = crng.random()
  *     return output
  */
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
-    __pyx_t_3 = __pyx_t_5; __Pyx_INCREF(__pyx_t_3); __pyx_t_7 = 0;
-    __pyx_t_8 = NULL;
-  } else {
-    __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 12, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_8 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 12, __pyx_L1_error)
-  }
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  for (;;) {
-    if (likely(!__pyx_t_8)) {
-      if (likely(PyList_CheckExact(__pyx_t_3))) {
-        if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_3)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(2, 12, __pyx_L1_error)
-        #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(2, 12, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_5);
-        #endif
-      } else {
-        if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(2, 12, __pyx_L1_error)
-        #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(2, 12, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_5);
-        #endif
-      }
-    } else {
-      __pyx_t_5 = __pyx_t_8(__pyx_t_3);
-      if (unlikely(!__pyx_t_5)) {
-        PyObject* exc_type = PyErr_Occurred();
-        if (exc_type) {
-          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(2, 12, __pyx_L1_error)
-        }
-        break;
-      }
-      __Pyx_GOTREF(__pyx_t_5);
-    }
-    __Pyx_XDECREF_SET(__pyx_v_n, __pyx_t_5);
-    __pyx_t_5 = 0;
+  __pyx_t_7 = (__pyx_v_view.shape[0]);
+  __pyx_t_8 = __pyx_t_7;
+  for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
+    __pyx_v_n = __pyx_t_9;
 
     /* "cython_example/matrix/random.pyx":13
  *     view = output.flatten()
- *     for n in range(view.size):
+ *     for n in range(view.shape[0]):
  *         view[n] = crng.random()             # <<<<<<<<<<<<<<
  *     return output
  */
-    __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(2, 13, __pyx_L1_error)
-    __pyx_t_10 = __pyx_t_9;
+    __pyx_t_10 = __pyx_v_n;
     *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_view.data) + __pyx_t_10)) )) = ((struct __pyx_vtabstruct_14cython_example_6random_4crng_CRNG *)__pyx_v_crng->__pyx_vtab)->random(__pyx_v_crng);
-
-    /* "cython_example/matrix/random.pyx":12
- *     output = np.empty(shape, dtype=np.double)
- *     view = output.flatten()
- *     for n in range(view.size):             # <<<<<<<<<<<<<<
- *         view[n] = crng.random()
- *     return output
- */
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "cython_example/matrix/random.pyx":14
- *     for n in range(view.size):
+ *     for n in range(view.shape[0]):
  *         view[n] = crng.random()
  *     return output             # <<<<<<<<<<<<<<
  */
@@ -3193,7 +3133,6 @@ static PyObject *__pyx_pf_14cython_example_6matrix_4random(CYTHON_UNUSED PyObjec
   __PYX_XDEC_MEMVIEW(&__pyx_v_view, 1);
   __Pyx_XDECREF((PyObject *)__pyx_v_crng);
   __Pyx_XDECREF(__pyx_v_output);
-  __Pyx_XDECREF(__pyx_v_n);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -22194,18 +22133,6 @@ __pyx_fail:
     result.memview = NULL;
     result.data = NULL;
     return result;
-}
-
-/* MemviewDtypeToObject */
-  static CYTHON_INLINE PyObject *__pyx_memview_get_double(const char *itemp) {
-    return (PyObject *) PyFloat_FromDouble(*(double *) itemp);
-}
-static CYTHON_INLINE int __pyx_memview_set_double(const char *itemp, PyObject *obj) {
-    double value = __pyx_PyFloat_AsDouble(obj);
-    if ((value == (double)-1) && PyErr_Occurred())
-        return 0;
-    *(double *) itemp = value;
-    return 1;
 }
 
 /* Declarations */
